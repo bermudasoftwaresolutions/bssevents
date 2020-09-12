@@ -1,0 +1,29 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<div class="form-row pb-3">
+	<label class="col-sm-4" for="inputName"><f:translate key="tx_bssshop_domain_model_client.name" /></label>
+	<f:form.textfield class="form-control col-sm-8" id="inputName" property="name" />
+</div>
+<div class="form-row pb-3">
+	<label class="col-sm-4" for="inputEmail"><f:translate key="tx_bssshop_domain_model_client.email" /></label>
+	<f:form.textfield class="form-control col-sm-8" id="inputEmail" property="email"></f:form.textfield>
+</div>
+<div class="form-row pb-3">
+	<label class="col-sm-4" for="inputStreet"><f:translate key="tx_bssshop_domain_model_client.street" /></label>
+	<f:form.textarea class="col-sm-8 form-control" id="inputStreet" rows="2" property="street"></f:form.textarea>
+</div>
+<div class="form-row pb-3">
+	<label class="col-sm-4" for="inputZip"><f:translate key="tx_bssshop_domain_model_client.zip" /> <f:translate key="tx_bssshop_domain_model_client.city" /></label>
+	<f:form.textfield class="form-control col-sm-2 mb-1" id="inputZip" property="zip" />
+	<f:form.textfield class="form-control col-sm-6" id="inputCity" property="city" />
+</div>
+<div class="form-row pb-3">
+	<label class="col-sm-4"><f:translate key="tx_bssshop_domain_model_client.country" /></label>
+	<f:form.select class="form-control col-sm-8" property="country" name="country" id="country" options="{countries}" value="{client.country}" optionValueField="uid" optionLabelField="shortNameEn" />
+</div>
+<div class="form-row pb-3">
+	<label class="col-sm-4" for="inputStreet"><f:translate key="tx_bssshop_domain_model_client.phone" /></label>
+	<f:form.textfield class="col-sm-8 form-control" id="inputPhone" property="phone" />
+</div>
+
+</html>

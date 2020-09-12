@@ -1,0 +1,59 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Ajax"/>
+
+<f:section name="content">
+
+
+    <f:if condition="{products}">
+        <f:then>
+            <f:for each="{products}" as="product" iteration="iterator">
+                <div class="product col-sm-4 mb-4 {f:if(condition: '{iterator.cycle % 3}', then: 'border-right')}"
+                     data-builduid="{product.builds.0.uid}">
+                    <div class="mb-2">
+                        <f:link.action class="category-title" action="list" controller="Product"
+                                       arguments="{category : product.category}">
+                            {product.category.title}
+                        </f:link.action>
+                    </div>
+                    <div class="mb-3 text-center">
+                        <f:link.action action="show" controller="Product" arguments="{product : product}">
+                            <f:if condition="{product.builds.0.image.0}">
+                                <f:image image="{product.builds.0.image.0}"
+                                         alt="{product.builds.0.image.originalResource.description}"
+                                         title="{product.builds.0.image.originalResource.title}"
+                                         width="185c" height="124c"/>
+                            </f:if>
+                        </f:link.action>
+                    </div>
+                    <div class="row">
+                        <f:for each="{product.builds}" as="build">
+                            <f:if condition="{build.main}">
+                                <div class="col price">{build.price}.-</div>
+                            </f:if>
+                        </f:for>
+
+                        <div class="col icon-cart text-right">
+                            <button class="product-list add-to-cart">
+                                <i class="fa fa-shopping-cart pointer"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <f:link.action action="show" controller="Product" arguments="{product : product}">
+                        <div><span class="title" title="{product.name}">{product.name -> f:format.html()-> f:format.crop(maxCharacters: 40)}</span>
+                            <f:comment>
+                                {product.description -> f:format.html()-> f:format.crop(maxCharacters: 170)}
+                            </f:comment>
+                        </div>
+                    </f:link.action>
+                </div>
+            </f:for>
+            <input type="hidden" class="row" value="{rows}">
+
+        </f:then>
+        <f:else>
+            <input type="hidden" class="row" value="{rows}">
+        </f:else>
+    </f:if>
+
+</f:section>
+</html>

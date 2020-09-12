@@ -1,0 +1,220 @@
+{namespace price=Bermuda\BssShop\ViewHelpers}
+
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Default"/>
+
+
+<f:section name="content">
+
+    <div class="container">
+        <div class="row justify-content-center pt-5">
+            <f:render partial="Categories" arguments="{_all}"/>
+            <div class="col-xl-7 col-sm-12 pl-0 pr-0">
+
+                        <div class="row ml-3 mr-3">
+                            <div class="col-6 pl-0">
+                                <h4 class=""><f:translate key="tx_bssshop_domain_model_product.orders"/></h4>
+
+                            </div>
+                            <div class="col-6 pl-0 text-right download-csv">
+                                <f:link.action action="downloadCsv" controller="Order" arguments="{orderUid : order.uid, sort: sort, search: search}">
+                                <i class="fa fa-download"></i>
+                                </f:link.action>
+                            </div>
+                        </div>
+                        <div class="row ml-3 mr-3">
+                            <div class="col-12 pl-0">
+                                <f:form action="edit" arguments="{search:search}">
+                                    <div class="row mb-3">
+                                        <div class="col-xl-6">
+                                            <div class="input-group">
+
+                                                <f:form.textfield name="search" class="form-control form-control-sm search-input search-orders" value="{search}"
+                                                                  placeholder=""/>
+                                                <span class="search-icon"><i class="fa fa-search"></i></span>
+                                                <f:comment>
+                                                <div class="input-group-prepend">
+                                                    <f:form.button type="submit" class="search-button pb-1">
+                                                        <f:translate key="tx_bssshop_domain_model_product.search"/>
+                                                    </f:form.button>
+                                                </div>
+                                                </f:comment>
+                                                <f:link.action action="edit" controller="Order" class="clear-search">
+                                                    <span class="pb-2"><i class="fa fa-times"></i></span>
+                                                </f:link.action>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6">
+                                            <select class="col-xl-6 form-control form-control-sm float-right order">
+                                                <option value="date"
+                                                        data-order="{f:uri.action(controller: 'Order', action: 'edit')}"
+                                                        {f:if(condition: sort, then:
+                                                '', else: 'selected')} >Order by Date</option>
+                                                <option value="status"
+                                                        data-order="{f:uri.action(controller: 'Order', action: 'edit', arguments: {sort: 'status', search: search})}"
+                                                        {f:if(condition: '{sort} == \'status\'', then:
+                                                'selected', else: '')}>Order by Status</option>
+                                                <option value="client"
+                                                        data-order="{f:uri.action(controller: 'Order', action: 'edit', arguments: {sort: 'client', search: search})}"
+                                                        {f:if(condition: '{sort} == \'client\'', then:
+                                                'selected', else: '')}>Order by Client</option>
+                                                <option value="total"
+                                                        data-order="{f:uri.action(controller: 'Order', action: 'edit', arguments: {sort: 'total', search: search})}"
+                                                        {f:if(condition: '{sort} == \'total\'', then:
+                                                'selected', else: '')}>Order by Total</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </f:form>
+                            </div>
+                        </div>
+                <f:if condition="{orders}">
+                    <f:then>
+                        <div class="row ml-3 mr-3">
+                            <div class="col-1 border-bottom font-weight-bold">
+                                Nr.
+                            </div>
+                            <div class="col-3 border-bottom font-weight-bold">
+                                Status
+                            </div>
+                            <div class="col-2 border-bottom font-weight-bold">
+                                Date
+                            </div>
+                            <div class="col-3 border-bottom font-weight-bold">
+                                Client
+                            </div>
+                            <div class="col-3 border-bottom border-left font-weight-bold text-right">
+                                Total
+                            </div>
+                        </div>
+                        <f:for each="{orders}" as="order" iteration="iterator">
+                            <f:if condition="{iterator.isOdd}">
+                                <f:then>
+                                    <div class="row table-row ml-3 mr-3">
+                                        <div class="col-1 pt-2 pb-2">
+                                            <f:link.action action="show" controller="Order" arguments="{orderUid : order.uid}" class="table-row-link">
+                                            #{order.uid}
+                                            </f:link.action>
+                                        </div>
+                                        <div class="col-3 pt-2">
+                                            <select class="form-control-sm orders col-sm-12 select-build"
+                                                    data-action="{f:uri.action(controller: 'Order', action: 'changeOrderStatus' )}"
+                                                    data-order="{order.uid}">
+                                                <f:if condition="{order.orderStatus.0.uid} == {defaultStatus.uid}">
+                                                    <f:then>
+                                                        <option value="{defaultStatus.uid}" selected>{defaultStatus.status}</option>
+                                                    </f:then>
+                                                    <f:else>
+                                                        <option value="{defaultStatus.uid}">{defaultStatus.status}</option>
+                                                    </f:else>
+                                                </f:if>
+                                                <f:for each="{statuses}" as="status">
+                                                    <f:if condition="{order.orderStatus.0.uid} == {status.uid}">
+                                                        <f:then>
+                                                            <option value="{status.uid}" selected>{status.status}</option>
+                                                        </f:then>
+                                                        <f:else>
+                                                            <option value="{status.uid}">{status.status}</option>
+                                                        </f:else>
+                                                    </f:if>
+                                                </f:for>
+                                            </select>
+                                        </div>
+                                        <div class="col-2 pt-2">
+                                            <f:link.action action="show" controller="Order" arguments="{orderUid : order.uid}" class="table-row-link">
+                                            <f:format.date format="%Y-%m-%d">{order.crdate}</f:format.date>
+                                            </f:link.action>
+                                        </div>
+                                        <div class="col-3 pt-2">
+                                            <f:link.action action="show" controller="Order" arguments="{orderUid : order.uid}" class="table-row-link">
+                                            {order.client.name}
+                                            </f:link.action>
+                                        </div>
+                                        <div class="col-3 pt-2 pb-1 border-left text-right">
+                                            <f:link.action action="show" controller="Order" arguments="{orderUid : order.uid}" class="table-row-link">
+                                            {price:priceFormat(price: '{order.total}', currency: 1)} Fr.
+                                            </f:link.action>
+
+                                        </div>
+                                    </div>
+                                </f:then>
+                                <f:else>
+                                    <div class="row table-row table-success ml-3 mr-3">
+                                        <div class="col-1 pt-2 pb-2">
+                                            <f:link.action action="show" controller="Order" arguments="{orderUid : order.uid}" class="table-row-link">
+                                                #{order.uid}
+                                            </f:link.action>
+                                        </div>
+                                        <div class="col-3 pt-2">
+                                            <select class="form-control-sm orders col-sm-12 select-build"
+                                                    data-action="{f:uri.action(controller: 'Order', action: 'changeOrderStatus' )}"
+                                                    data-order="{order.uid}">
+                                                <f:if condition="{order.orderStatus.0.uid} == {defaultStatus.uid}">
+                                                    <f:then>
+                                                        <option value="{defaultStatus.uid}" selected>{defaultStatus.status}</option>
+                                                    </f:then>
+                                                    <f:else>
+                                                        <option value="{defaultStatus.uid}">{defaultStatus.status}</option>
+                                                    </f:else>
+                                                </f:if>
+                                                <f:for each="{statuses}" as="status">
+                                                    <f:if condition="{order.orderStatus.0.uid} == {status.uid}">
+                                                        <f:then>
+                                                            <option value="{status.uid}" selected>{status.status}</option>
+                                                        </f:then>
+                                                        <f:else>
+                                                            <option value="{status.uid}">{status.status}</option>
+                                                        </f:else>
+                                                    </f:if>
+                                                </f:for>
+                                            </select>
+                                        </div>
+                                        <div class="col-2 pt-2">
+                                            <f:link.action action="show" controller="Order" arguments="{orderUid : order.uid}" class="table-row-link">
+                                                <f:format.date format="%Y-%m-%d">{order.crdate}</f:format.date>
+                                            </f:link.action>
+                                        </div>
+                                        <div class="col-3 pt-2">
+                                            <f:link.action action="show" controller="Order" arguments="{orderUid : order.uid}" class="table-row-link">
+                                                {order.client.name}
+                                            </f:link.action>
+                                        </div>
+                                        <div class="col-3 pt-2 pb-1 border-left text-right">
+                                            <f:link.action action="show" controller="Order" arguments="{orderUid : order.uid}" class="table-row-link">
+                                                {price:priceFormat(price: '{order.total}', currency: 1)} Fr.
+                                            </f:link.action>
+
+                                        </div>
+                                    </div>
+                                </f:else>
+                            </f:if>
+                        </f:for>
+                        <div class="row">
+                            <div class="col-12 mt-5 mb-5 ml-3 mr-3">
+                                <f:link.action action="list" controller="Product"
+                                               class="btn btn-success color-white mr-2">
+                                    <span class="mr-2"><i class="fa fa-arrow-left"></i></span>Back
+                                    to
+                                    Shop
+                                </f:link.action>
+                            </div>
+                        </div>
+                    </f:then>
+                    <f:else>
+                        <div class="row ml-3 mr-3">
+                            <div class="col-lg-8 mb-4 alert alert-info" role="alert">
+                                <p>
+                                    <f:translate key="tx_bssshop_domain_model_product.empty"/>
+                                    <b>"{search}"</b></p>
+                            </div>
+                        </div>
+                    </f:else>
+                </f:if>
+            </div>
+            <f:render partial="Navigation" arguments="{_all}"/>
+
+        </div>
+    </div>
+
+</f:section>
+</html>

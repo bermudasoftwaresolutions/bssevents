@@ -1,0 +1,55 @@
+{namespace price=Bermuda\BssShop\ViewHelpers}
+
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Ajax"/>
+
+
+<f:section name="content">
+
+    <div class="col-1 pt-2 pb-2">
+        <f:link.action action="show" controller="Order" arguments="{orderUid : order.uid}" class="table-row-link">
+            #{order.uid}
+        </f:link.action>
+    </div>
+    <div class="col-3 pt-2">
+        <select class="form-control-sm orders col-sm-12 select-build"
+                data-action="{f:uri.action(controller: 'Order', action: 'changeOrderStatus' )}"
+                data-order="{order.uid}">
+            <f:if condition="{order.orderStatus.0.uid} == {defaultStatus.uid}">
+                <f:then>
+                    <option value="{defaultStatus.uid}" selected>{defaultStatus.status}</option>
+                </f:then>
+                <f:else>
+                    <option value="{defaultStatus.uid}">{defaultStatus.status}</option>
+                </f:else>
+            </f:if>
+            <f:for each="{statuses}" as="status">
+                <f:if condition="{order.orderStatus.uid} == {status.uid}">
+                    <f:then>
+                        <option value="{status.uid}" selected>{status.status}</option>
+                    </f:then>
+                    <f:else>
+                        <option value="{status.uid}">{status.status}</option>
+                    </f:else>
+                </f:if>
+            </f:for>
+        </select>
+    </div>
+    <div class="col-2 pt-2">
+        <f:link.action action="show" controller="Order" arguments="{orderUid : order.uid}" class="table-row-link">
+            <f:format.date format="%Y-%m-%d">{order.crdate}</f:format.date>
+        </f:link.action>
+    </div>
+    <div class="col-3 pt-2">
+        <f:link.action action="show" controller="Order" arguments="{orderUid : order.uid}" class="table-row-link">
+            {order.client.name}
+        </f:link.action>
+    </div>
+    <div class="col-3 pt-2 pb-1 border-left text-right">
+        <f:link.action action="show" controller="Order" arguments="{orderUid : order.uid}" class="table-row-link">
+            {price:priceFormat(price: '{order.total}', currency: 1)} Fr.
+        </f:link.action>
+
+    </div>
+</f:section>
+</html>

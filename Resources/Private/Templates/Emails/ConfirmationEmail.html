@@ -1,0 +1,103 @@
+{namespace price=Bermuda\BssShop\ViewHelpers}
+
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Default"/>
+
+
+<f:section name="content">
+
+    <table border="0" cellpadding="0" cellspacing="0" height="100%" width="720" id="bodyTable">
+        <tr>
+            <td align="left" valign="top">
+                <table border="0" cellpadding="10" cellspacing="0" width="720" id="emailContainer" style="margin-bottom: 20px">
+                    <tr>
+                        <td align="left" valign="top" style="line-height: 1.4;">
+                            Dear {order.client.name},
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left" valign="top" style="line-height: 1.4;">
+                            Thank You for your purchase! The link where You can check your order is:
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left" valign="top" style="line-height: 1.4;">
+                            <a href="{baseUrl}{f:uri.action(controller: 'Order', action: 'show', arguments:  {orderUid : order.uid})}"
+                               target="_blank">
+                               {baseUrl}{f:uri.action(controller: 'Order', action: 'show', arguments:
+                                {orderUid : order.uid})}
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+
+
+                <table style="font-family: arial, sans-serif; border-collapse: collapse; width: 720px;">
+                    <tr style="position: relative; background-color: #f1f1f5;">
+                        <th style="width: 50%; padding: 8px; text-align: left;">Products</th>
+                        <th style="width: 16%; padding: 8px; text-align: right;">Amount</th>
+                        <th style="width: 16%; padding: 8px; text-align: right;">Price</th>
+                        <th style="width: 16%; padding: 8px; text-align: right;">Total</th>
+                    </tr>
+                    <f:for each="{order.orderitems}" as="orderitem" iteration="iterator">
+                        <f:if condition="{iterator.isOdd}">
+                            <f:then>
+                                <tr style="position: relative; height: 46px;">
+                                    <td style="width: 50%; padding: 8px; text-align: left;">
+                                        <b>{orderitem.product.name}</b>
+                                        - {orderitem.build.name}
+                                    </td>
+                                    <td style="width: 16%; padding: 8px; text-align: right;">x{orderitem.amount}
+                                    </td>
+                                    <td style="width: 16%; padding: 8px; text-align: right;">
+                                        {price:priceFormat(price: '{orderitem.price}', currency: 1)} Fr.
+                                    </td>
+                                    <td style="width: 16%; padding: 8px; text-align: right;">
+                                        {price:priceFormat(price: '{orderitem.total}', currency: 1)} Fr.
+                                    </td>
+                                </tr>
+                            </f:then>
+                            <f:else>
+                                <tr style="position: relative; background-color: #f1f1f5; height: 46px;">
+                                    <td style="width: 50%; padding: 8px; text-align: left;">
+                                        <b>{orderitem.product.name}</b>
+                                        - {orderitem.build.name}
+                                    </td>
+                                    <td style="width: 16%; padding: 8px; text-align: right;">x{orderitem.amount}
+                                    </td>
+                                    <td style="width: 16%; padding: 8px; text-align: right;">
+                                        {price:priceFormat(price: '{orderitem.price}', currency: 1)} Fr.
+                                    </td>
+                                    <td style="width: 16%; padding: 8px; text-align: right;">
+                                        {price:priceFormat(price: '{orderitem.total}', currency: 1)} Fr.
+                                    </td>
+                                </tr>
+                            </f:else>
+                        </f:if>
+                    </f:for>
+                    <tr>
+                        <td style="width: 50%;"></td>
+                        <td style="width: 16%;"></td>
+                        <td style="width: 16%;"></td>
+                        <td style="width: 16%; padding: 8px; text-decoration: underline; font-weight: 600; text-align: right;">
+                            {price:priceFormat(price:
+                            '{order.total}', currency: 1)} Fr.
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td align="left" valign="top">
+                            <f:if condition="{order.message}">
+                                <h4 style="margin-bottom: 12px; margin-top: 12px;">Message</h4>
+                                {order.message -> f:format.html()}
+                            </f:if>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+</f:section>
+</html>

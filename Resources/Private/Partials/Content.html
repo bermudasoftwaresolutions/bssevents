@@ -1,0 +1,75 @@
+<div class="col-xl-7 pr-4">
+
+    <f:render section="search" arguments="{_all}" />
+
+    <f:render section="products" arguments="{_all}"/>
+
+    <f:section name="search">
+        <f:form action="list" arguments="{search:search}">
+            <div class="row mb-5">
+                <div class="col-xl-6 mb-3">
+
+                        <f:form.textfield  name="search" class="form-control form-control-sm" value="{search}" placeholder="Search"/>
+
+                </div>
+                <div class="col-xl-6">
+                    <select class="col-xl-5 form-control form-control-sm float-right">
+                        <option>Option 1</option>
+                        <option>Option 2</option>
+                        <option>Option 3</option>
+                        <option>Option 4</option>
+                    </select>
+                </div>
+            </div>
+        </f:form>
+    </f:section>
+
+    <f:section name="products">
+        <div class="products row">
+            <f:if condition="{products}">
+                <f:then>
+                    <f:for each="{products}" as="product" iteration="iterator">
+                        <f:debug>{product}</f:debug>
+                        <div class="col-sm-4 mb-4 {f:if(condition: '{iterator.cycle % 3}', then: 'border-right')}">
+                            <div class="mb-4">
+                                <h5>{product.category.0.title}</h5>
+                            </div>
+                            <div class="mb-3 text-center">
+                                <f:link.action action="show" arguments="{product : product}">
+                                    <f:if condition="{product.build.0.image.0}">
+                                        <f:image image="{product.build.0.image.0}"
+                                                 alt="{product.build.0.image.originalResource.description}"
+                                                 title="{product.build.0.image.originalResource.title}"
+                                                 width="185c" height="124c"/>
+                                    </f:if>
+                                </f:link.action>
+                            </div>
+                            <div class="row">
+                                <f:for each="{product.build}" as="build">
+                                    <f:if condition="{build.main}">
+                                        <div class="col price">{build.price}.-</div>
+                                    </f:if>
+                                </f:for>
+
+                                <div class="col icon-cart text-right">
+                                    <button class="product-list add-to-cart" data-clientid="{client.uid}" data-buildid="{product.build.0.uid}" data-ajax="{ajax}" data-storage="{storagepid}">
+                                        <i class="fa fa-shopping-cart pointer"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div><span class="title">{product.name}</span>
+                                {product.description}
+                            </div>
+                        </div>
+                    </f:for>
+
+                </f:then>
+                <f:else>
+                    <div class="col-sm-4 mb-4">
+                        <f:translate key="tx_bssshop_domain_model_product.empty" /> <b>"{search}"</b>
+                    </div>
+                </f:else>
+            </f:if>
+        </div>
+    </f:section>
+</div>

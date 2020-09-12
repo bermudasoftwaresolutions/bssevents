@@ -1,0 +1,84 @@
+<div class="mb-2">
+    <f:link.action class="category-title" action="list"
+                   arguments="{category : product.category}">
+        {product.category.title}
+    </f:link.action>
+</div>
+<h5 class="pb-2"><span class="font-weight-bold mr-2">{product.name}</span></h5>
+<div class="pb-4">
+    <select class="form-control-sm col-sm-12 select-build"
+            data-build="{f:uri.action(controller: 'Product', action: 'selectedProductBuild' )}">
+        <f:for each="{product.builds}" as="build">
+            <f:if condition="{selectedBuild}">
+                <f:then>
+                    <f:if condition="{build.uid} == {selectedBuild.uid} ">
+                        <f:then>
+                            <option value="{build.uid}" selected>
+                                {build.name}
+                            </option>
+                        </f:then>
+                        <f:else>
+                            <option value="{build.uid}">
+                                {build.name}
+                            </option>
+                        </f:else>
+                    </f:if>
+                </f:then>
+                <f:else>
+                    <f:if condition="{build.main}">
+                        <f:then>
+                            <option value="{build.uid}" selected>
+                                {build.name}
+                            </option>
+                        </f:then>
+                        <f:else>
+                            <option value="{build.uid}">
+                                {build.name}
+                            </option>
+                        </f:else>
+                    </f:if>
+                </f:else>
+            </f:if>
+        </f:for>
+    </select>
+</div>
+
+<div class="mb-3 text-right build-price">
+    <f:if condition="{selectedBuild}">
+        <f:then>
+            <h3>{selectedBuild.price}.-</h3>
+        </f:then>
+        <f:else>
+            <f:for each="{product.builds}" as="build">
+                <f:if condition="{build.price} && {build.main}">
+                    <h3>{price:priceFormat(price: '{build.price}')}</h3>
+                </f:if>
+            </f:for>
+        </f:else>
+    </f:if>
+</div>
+
+<div class="mb-3 text-right build-price">
+    <f:if condition="{selectedBuild}">
+        <f:then>
+            <div class="button-wrapper">
+                <button class="btn btn-success add-to-cart" data-buildid="{selectedBuild.uid}">
+                    <span class="mr-2"><i class="fa fa-shopping-cart"></i></span>
+                    Add to Cart
+                </button>
+            </div>
+        </f:then>
+        <f:else>
+            <div class="button-wrapper">
+                <button class="btn btn-success add-to-cart" data-buildid="{product.builds.0.uid}">
+                    <span class="mr-2"><i class="fa fa-shopping-cart"></i></span>
+                    Add to Cart
+                </button>
+            </div>
+        </f:else>
+    </f:if>
+</div>
+
+<div class="mb-3 product-description">
+    {product.description -> f:format.html()}
+</div>

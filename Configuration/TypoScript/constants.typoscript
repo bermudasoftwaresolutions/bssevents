@@ -1,0 +1,15 @@
+
+plugin.tx_bssshop_bssshop {
+    view {
+        # cat=plugin.tx_bssshop_bssshop/file; type=string; label=Path to template root (FE)
+        templateRootPath = EXT:bss_shop/Resources/Private/Templates/
+        # cat=plugin.tx_bssshop_bssshop/file; type=string; label=Path to template partials (FE)
+        partialRootPath = EXT:bss_shop/Resources/Private/Partials/
+        # cat=plugin.tx_bssshop_bssshop/file; type=string; label=Path to template layouts (FE)
+        layoutRootPath = EXT:bss_shop/Resources/Private/Layouts/
+    }
+    persistence {
+        # cat=plugin.tx_bssshop_bssshop//a; type=string; label=Default storage PID
+        # storagePid =
+    }
+}

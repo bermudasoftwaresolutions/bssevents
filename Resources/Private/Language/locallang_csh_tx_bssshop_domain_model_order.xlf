@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2019-10-23T09:25:40Z" product-name="bss_shop">
+		<header/>
+		<body>
+			<trans-unit id="number.description">
+				<source>number</source>
+			</trans-unit>
+			<trans-unit id="message.description">
+				<source>message</source>
+			</trans-unit>
+			<trans-unit id="total.description">
+				<source>total</source>
+			</trans-unit>
+			<trans-unit id="merchant_address.description">
+				<source>merchantAddress</source>
+			</trans-unit>
+			<trans-unit id="client_address.description">
+				<source>clientAddress</source>
+			</trans-unit>
+			<trans-unit id="client.description">
+				<source>client</source>
+			</trans-unit>
+			<trans-unit id="orderitems.description">
+				<source>orderitems</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
