@@ -1,0 +1,60 @@
+{namespace bss=Bermuda\BssEvents\ViewHelpers}
+
+
+<f:if condition="{day.count} == 0">
+
+    <div class="bss_calendar_day">
+        <span class="bss_calendar_day_title">{day.title}</span>
+    </div>
+
+</f:if>
+
+
+<f:if condition="{day.count} == 1">
+    <f:if condition="{settings.bssEvents.main.access_to_details}">
+        <f:then>
+            <f:link.action class="bss-event-detail-link" action="detail" arguments="{appointment:day.firstAppointment}">
+                <div class="bss_calendar_day" data-title="{day.firstAppointment.event.title}" style="background-color: {day.firstAppointment.color};">
+
+                    <div style="height: 100%; width: 100%; overflow: hidden; word-wrap: break-word;">
+                        <span class="bss_calendar_day_title">{day.title}</span><br/>
+                        <span>{day.firstAppointment.event.title}</span>
+                    </div>
+
+                </div>
+            </f:link.action>
+        </f:then>
+        <f:else>
+            <div class="bss_calendar_day" data-title="{day.firstAppointment.event.title}" style="background-color: {day.firstAppointment.color};">
+
+                <div style="height: 100%; width: 100%; overflow: hidden; word-wrap: break-word;">
+                    <span class="bss_calendar_day_title">{day.title}</span><br/>
+                    <span>{day.firstAppointment.event.title}</span>
+                </div>
+
+            </div>
+        </f:else>
+    </f:if>
+</f:if>
+
+
+<f:if condition="{day.count} > 1">
+
+    <f:link.action controller="Event" action="show" arguments="{dayString:day.dateString, style:'list'}">
+
+        <div class="bss_calendar_day" style="background-color: {day.firstAppointment.color};">
+
+            <div style="height: 100%; width: 100%; overflow: hidden; word-wrap: break-word;">
+                <span class="bss_calendar_day_title">{day.title}</span><br/>
+                <span>{day.firstAppointment.event.title}</span>
+            </div>
+
+            <span class="plus_count">+ {day.count - 1}</span>
+
+        </div>
+
+    </f:link.action>
+
+</f:if>
+
+

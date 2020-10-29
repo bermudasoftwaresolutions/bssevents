@@ -1,0 +1,121 @@
+plugin.tx_bssevents {
+    view {
+        templateRootPaths {
+            10 = {$plugin.tx_bssevents.view.templateRootPath}
+        }
+        partialRootPaths {
+            10 = {$plugin.tx_bssevents.view.partialRootPath}
+        }
+        layoutRootPaths {
+            10 = {$plugin.tx_bssevents.view.layoutRootPath}
+        }
+    }
+    settings {
+        adminGid = {$plugin.tx_bssevents.settings.adminGid}
+        moderatorGid = {$plugin.tx_bssevents.settings.moderatorGid}
+        creatorGid = {$plugin.tx_bssevents.settings.creatorGid}
+
+        creationSpan = {$plugin.tx_bssevents.settings.creationSpan}
+
+        cssFile = {$plugin.tx_bssevents.settings.cssFile}
+    }
+    persistence {
+            updateReferenceIndex = 1
+            classes.Bermuda\BssEvents\Domain\Model\AppointmentFileReference.mapping.tableName = sys_file_reference
+        }
+}
+plugin.tx_bssevents._CSS_DEFAULT_STYLE (
+    ul.image-container {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        padding-top: 15px;
+    }
+    li.image-list {
+        float: left;
+    }
+    li.show-image{
+        width: auto;
+        float: left;
+        margin: 0px 10px 10px 0px;
+        }
+    li.show-image label {
+        margin-bottom: 0px;
+    }
+    li.image-list label {
+           display: inline-block;
+           width: 165px;
+         }
+
+    li.image-list label img {
+         display: block;
+         overflow: auto;
+         max-height: 150px;
+    }
+     li.image-list input {
+          float: left;
+          width: auto;
+          margin-right: 10px;
+    }
+    .subscribe-fields form.crete-form input,
+    .subscribe-fields form.crete-form textarea {
+        width: 89%;
+        display: inline-block;
+    }
+
+    form.crete-form input.date {
+        width: 88% !important;
+    }
+
+    form.crete-form label.registration {
+        width: 100% !important;
+    }
+
+    form.crete-form label {
+        display: inline-block;
+        width: 100px;
+    }
+
+
+)
+
+page.includeJS{
+   jq_validation = EXT:bss_events/Resources/Public/js/jquery.validate.min.js
+   jq_validation_localization = EXT:bss_events/Resources/Public/js/plugins/localization/messages_de.js
+ }
+ page.includeJSFooter.bss_events_fontawesome = https://use.fontawesome.com/releases/v5.0.9/js/all.js
+ page.includeJSFooter.bss_events_main = EXT:bss_events/Resources/Public/js/main.js
+
+
+temp.user = COA_INT
+temp.user {
+  10 = TEXT
+  10.data = TSFE:fe_user|user|name
+  10.wrap = <div class="userdata-name" data-name="|"></div>
+  15 = TEXT
+  15.data = TSFE:fe_user|user|first_name
+  15.wrap = <div class="userdata-first_name" data-first_name="|"></div>
+  20 = TEXT
+  20.data = TSFE:fe_user|user|last_name
+  20.wrap = <div class="userdata-last_name" data-last_name="|"></div>
+  25 = TEXT
+  25.data = TSFE:fe_user|user|email
+  25.wrap = <div class="userdata-email" data-email="|"></div>
+  30 = TEXT
+  30.data = TSFE:fe_user|user|telephone
+  30.wrap = <div class="userdata-telephone" data-telephone="|"></div>
+  35 = TEXT
+  35.data = TSFE:fe_user|user|address
+  35.wrap = <div class="userdata-address" data-address="|"></div>
+  40 = TEXT
+  40.data = TSFE:fe_user|user|zip
+  40.wrap = <div class="userdata-zip" data-zip="|"></div>
+  45 = TEXT
+  45.data = TSFE:fe_user|user|city
+  45.wrap = <div class="userdata-city" data-city="|"></div>
+}
+
+#mail, fon, address, zip, city
+
+page.headerData.753951 < temp.user

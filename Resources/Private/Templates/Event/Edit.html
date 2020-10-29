@@ -1,0 +1,538 @@
+{namespace bss=Bermuda\BssEvents\ViewHelpers}
+{namespace h=Bermuda\BssEvents\ViewHelpers}
+<div class="row">
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+        <f:flashMessages/>
+
+        <h4 class="modal-title">
+            <f:translate key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_event.edit"/>
+        </h4>
+
+        <br/>
+
+        <div class="subscribe-fields">
+
+            <f:form extensionName="bssevents" pluginName="P1" controller="Event" action="edit"
+                    enctype="multipart/form-data" object="{newEvent}" name="event" arguments="{save:1}">
+                <label>
+                    <f:translate
+                            key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_event.title"/>
+                    :</label><br/>
+                <f:form.textfield property="title"/>
+                <br/>
+                <label>
+                    <f:translate
+                            key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_event.venue"/>
+                    :</label><br/>
+                <f:form.textfield property="place"/>
+                <br/>
+                <label>
+                    <f:translate
+                            key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_event.organizer"/>
+                    :</label><br/>
+                <f:form.textfield property="organizer"/>
+                <br/>
+                <label>
+                    <f:translate
+                            key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_event.content"/>
+                    :</label><br/>
+                <f:form.textarea id="bodyTextarea" property="body"/>
+                <f:form.hidden property="state" value="active"/>
+                <f:if condition="{settings.bssEvents.main.image_upload}">
+                    <label class="mt-2">
+                        <f:translate
+                                key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_event.attach"/>
+                        :</label><br/>
+
+                    <h:form.multiupload property="image">
+                        <ul class="image-container">
+                            <f:for each="{resources}" as="resource">
+                                <li class="image-list">
+                                    <label>
+                                        <h:form.multiupload.delete property="image" value="{resource}"/>
+                                        <f:image image="{resource}" alt="" width="150"/>
+                                    </label>
+                                </li>
+                            </f:for>
+                        </ul>
+                    </h:form.multiupload>
+                </f:if>
+
+                <label class="mt-2">
+                    <f:translate
+                            key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_event.categories"/>
+                    :</label><br/>
+
+                <f:form.select options="{categories}" property="categories" multiple="multiple" optionLabelField="title"
+                               optionValueField="uid"/>
+
+                <div class="panel panel-default mr-0 ml-0">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <span><f:translate
+                                    key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_event.appointments"/></span>
+                            <span id="appointment-add-btn" class="pull-right" style="cursor: pointer;"
+                                  onclick="$.fn.bssEventsAddAppointment($('#appointments-container'));">
+                                <i class="fa fa-plus-circle fa-2x" style="margin-top: -7px;"></i>
+                            </span>
+                        </h3>
+                    </div>
+                    <div class="panel-body pt-0 pb-0 pl-0 pr-0" id="appointments-container">
+
+                        <f:for each="{newEvent.appointments}" as="appointment">
+
+                            <div class="panel panel-default" data-appointmentid="{appointment.uid}">
+
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><span><f:translate
+                                            key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_appointment.new"/></span>
+                                        <span class="pull-right" style="cursor: pointer;"
+                                              onclick="$(this).parent().parent().parent().remove();">
+                                            <i class="fa fa-minus-circle fa-2x" style="margin-top: -7px;"></i>
+                                        </span>
+                                    </h3>
+                                </div>
+                                <div class="panel-body">
+
+                                    <label>
+                                        <f:translate
+                                                key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_appointment.date_from"/>
+                                    </label><br/>
+
+                                    <f:form.hidden name="event[appointments][{appointment.uid}][__identity]"
+                                                   value="{appointment.uid}"/>
+
+                                    <f:form.textfield class="initialDateTimePicker"
+                                                      id="datetimepickerFrom{appointment.uid}"
+                                                      name="event[appointments][{appointment.uid}][dateFrom]"
+                                                      value="{appointment.dateFrom -> f:format.date(format: 'd.m.Y H:i')}"/>
+                                    <br/>
+
+                                    <label>
+                                        <f:translate
+                                                key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_appointment.date_to"/>
+                                    </label><br/>
+                                    <f:form.textfield class="initialDateTimePicker"
+                                                      id="datetimepickerTo{appointment.uid}"
+                                                      name="event[appointments][{appointment.uid}][dateTo]"
+                                                      value="{appointment.dateTo -> f:format.date(format: 'd.m.Y H:i')}"/>
+                                    <br/>
+                                    <f:comment>
+
+                                        <hr/>
+
+                                        <label>
+                                            <f:translate
+                                                    key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_appointment_exception.repeat_weekly"/>
+                                        </label><br/>
+                                        <input type="checkbox" class="initialToggle"
+                                               name="tx_bssevents_p1[event][appointments][{appointment.uid}][repeatWeekly]"
+                                               value="1" {f:if(condition:'{appointment.repeatWeekly}', then:'checked' )}
+                                        /><br/><br/>
+
+                                        <hr/>
+                                    </f:comment>
+
+                                    <f:form.hidden name="event[appointments][{appointment.uid}][state]"
+                                                   value="{appointment.state}"/>
+                                    <br/>
+
+                                    <!-- registration -->
+                                    <div class="panel panel-default mt-0 mr-0 mb-0 ml-0">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title">
+                                                <span><f:translate
+                                                        key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_registration.registration"/></span>
+                                                <f:if condition="{appointment.registration}">
+                                                    <f:then>
+                                                        <span class="registration-add-btn pull-right"
+                                                              style="cursor: pointer; display: none"
+                                                              onclick="$.fn.bssEventsAddRegistration($(this).parent().parent().parent().find('.registration-container'));$(this).hide();">
+                                                            <i class="fa fa-plus-circle fa-2x"
+                                                               style="margin-top: -7px;"></i>
+                                                        </span>
+                                                    </f:then>
+                                                    <f:else>
+                                                        <span class="registration-add-btn pull-right"
+                                                              style="cursor: pointer;"
+                                                              onclick="$.fn.bssEventsAddRegistration($(this).parent().parent().parent().find('.registration-container'));$(this).hide();">
+                                                            <i class="fa fa-plus-circle fa-2x"
+                                                               style="margin-top: -7px;"></i>
+                                                        </span>
+                                                    </f:else>
+                                                </f:if>
+                                            </h3>
+                                        </div>
+                                        <div class="panel-body registration-container"
+                                             data-appointmentid="{appointment.uid}">
+
+                                            <f:if condition="{appointment.registration}">
+
+                                                <div class="panel panel-default mt-0 mr-0 mb-0 ml-0">
+                                                    <div class="panel-heading">
+                                                        <h3 class="panel-title"><span><f:translate
+                                                                key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_registration.new"/></span>
+                                                            <span class="pull-right" style="cursor: pointer;"
+                                                                  onclick="$(this).parent().parent().parent().parent().parent().find('.registration-add-btn').show();$(this).parent().parent().parent().remove();">
+                                                                <i class="fa fa-minus-circle fa-2x"
+                                                                   style="margin-top: -7px;"></i>
+                                                            </span>
+                                                        </h3>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <label>
+                                                            <f:translate
+                                                                    key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_registration.isPublic"/>
+                                                        </label><br/>
+                                                        <input type="checkbox" class="initialToggle"
+                                                               name="tx_bssevents_p1[event][appointments][{appointment.uid}][registration][public]"
+                                                               value="1" {f:if(condition:"{appointment.registration.public}",
+                                                        then:"checked")} /><br/>
+                                                        <label class="add-slots-label">
+                                                            <f:translate
+                                                                    key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_registration.addSlots"/>
+                                                        </label>
+                                                        <div class="add-slots-wrapper">
+                                                            <div class="toggle-add-slots">
+                                                                <input type="checkbox" class="initialToggle"
+                                                                       name="tx_bssevents_p1[event][appointments][{appointment.uid}][registration][slots]"
+                                                                       value="1" {f:if(condition:
+                                                                '{appointment.registration.slots}', then: 'checked',
+                                                                else: '')} /><br/>
+                                                            </div>
+                                                            <input class="slots {f:if(condition: '{appointment.registration.slots}', then: 'visible', else: '')}"
+                                                                   name="tx_bssevents_p1[event][appointments][{appointment.uid}][registration][slots]"
+                                                                   type="text" placeholder=""
+                                                                   value="{appointment.registration.slots}"/><br/>
+                                                        </div>
+                                                        <label>
+                                                            <f:translate
+                                                                    key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_registration.close"/>
+                                                        </label><br/>
+                                                        <input type="checkbox" class="initialToggle"
+                                                               name="tx_bssevents_p1[event][appointments][{appointment.uid}][registration][close]"
+                                                               value="1" {f:if(condition:"{appointment.registration.close}",
+                                                        then:"checked")} /><br/>
+
+                                                        <label>
+                                                            <f:translate
+                                                                    key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_registration.additionalInformation"/>
+                                                        </label><br/>
+                                                        <textarea rows="6"
+                                                                  name="tx_bssevents_p1[event][appointments][{appointment.uid}][registration][message]">{appointment.registration.message}</textarea><br/>
+
+                                                    </div>
+                                                </div>
+
+                                            </f:if>
+
+                                        </div>
+                                    </div>
+
+                                    <!-- files -->
+                                    <f:if condition="{settings.bssEvents.main.file_upload}">
+                                    <div class="panel panel-default mr-0 mb-0 ml-0">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title">
+                                                <span><f:translate
+                                                        key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_event.files.files"/></span>
+
+                                                <span class="file-add-btn pull-right" style="cursor: pointer;"
+                                                      onclick="$('#file-upload-{appointment.uid}').click();">
+                                                    <i class="fa fa-plus-circle fa-2x" style="margin-top: -7px;"></i>
+                                                </span>
+
+                                            </h3>
+                                        </div>
+                                        <div class="panel-body files-container" data-appointmentid="{appointment.uid}">
+
+                                            <table class="table table-striped">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">
+                                                        <f:translate
+                                                                key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_event.files.name"/>
+                                                    </th>
+                                                    <th scope="col">
+                                                        <f:translate
+                                                                key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_event.files.delete"/>
+                                                    </th>
+                                                </tr>
+                                                </thead>
+                                                <tbody class="files-table" data-appointmentid="{appointment.uid}">
+
+                                                <f:for each="{appointment.files}" as="file" iteration="counter"
+                                                       key="fileKey">
+
+                                                    <tr>
+                                                        <th scope="row">{counter.cycle}</th>
+                                                        <td class="file-name">
+                                                            <f:if condition="{file.originalResource.title}">
+                                                                <f:then>
+                                                                    <span>{file.originalResource.title}</span>
+                                                                </f:then>
+                                                                <f:else>
+                                                                    <span>{file.originalResource.name}</span>
+                                                                </f:else>
+                                                            </f:if>
+                                                        </td>
+                                                        <td>
+                                                            <f:link.action target="upload_target"
+                                                                           class="removeFile"
+                                                                           action="removeAppointmentFile"
+                                                                           arguments="{appointment:appointment, file:file}"
+                                                                           additionalAttributes="{onClick: '$.fn.bssEventsUploadMarker = $(this).parent().parent();'}">
+                                                                <i class="fa fa-times"></i></f:link.action>
+                                                        </td>
+                                                        <f:form.hidden
+                                                                name="event[appointments][{appointment.uid}][files][]"
+                                                                value="{file.uid}"/>
+                                                    </tr>
+
+                                                </f:for>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    </f:if>
+                                </div>
+                            </div>
+
+                            <f:for each="{appointment.childs}" as="child">
+                                <f:form.hidden name="event[appointments][{appointment.uid}][childs][]"
+                                               value="{child.uid}"/>
+                            </f:for>
+
+                        </f:for>
+
+                        <script>
+                            var language = $("#appointment-template-container").data('language');
+                            $.datetimepicker.setLocale(language);
+                            $(".initialDateTimePicker").datetimepicker({
+                                format: 'd.m.Y H:i',
+                                step: 15
+                            });
+                            $('.initialToggle').bootstrapToggle({
+                                on: '✓',
+                                off: '✗'
+                            });
+                        </script>
+
+
+                    </div>
+                </div>
+                <f:comment>
+                    <div class="panel panel-default mr-0 ml-0">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                            <span><f:translate
+                                    key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_event.recurringappointments"/></span>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th scope="col">
+                                        <f:translate
+                                                key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_event.active"/>
+                                    </th>
+                                    <th scope="col">
+                                        <f:translate
+                                                key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_appointment.date_from"/>
+                                    </th>
+                                    <th scope="col">
+                                        <f:translate
+                                                key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_appointment.date_to"/>
+                                    </th>
+                                    <th scope="col"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <f:for each="{newEvent.appointments}" as="appointment">
+                                    <f:for each="{appointment.childs}" as="child">
+
+                                        <tr>
+                                            <td>
+                                                <div class="form-check" style="max-width:40px;">
+                                                    <input type="checkbox" class="form-check-input"
+                                                           name="activeRecurringAppointments[]" value="{child.uid}"
+                                                           {f:if(condition:'{child.active}', then:'checked')} >
+                                                </div>
+                                            </td>
+                                            <td>{child.dateFrom -> f:format.date(format: 'd.m.Y H:i')}</td>
+                                            <td>{child.dateTo -> f:format.date(format: 'd.m.Y H:i')}</td>
+                                            <td></td>
+                                        </tr>
+
+                                    </f:for>
+                                </f:for>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </f:comment>
+
+                <f:form.button type="submit">
+                    <f:translate
+                            key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_event.send"/>
+                </f:form.button>
+                <br/>
+            </f:form>
+            <!-- fileuploads for each appointment-->
+            <f:for each="{newEvent.appointments}" as="appointment">
+                <div style="display: none;">
+                    <f:form target="upload_target" class="file-upload-form" extensionName="bssevents" pluginName="P1"
+                            controller="Event" action="appointmentFileUpload" enctype="multipart/form-data"
+                            name="upload" arguments="{appointment:appointment}">
+                        <f:form.textfield name="shownname"/>
+                        <f:form.upload class="file-upload" id="file-upload-{appointment.uid}"
+                                       additionalAttributes="{data-id: appointment.uid}" name="file"/>
+                    </f:form>
+                </div>
+
+            </f:for>
+
+            <iframe id="upload_target" name="upload_target" src="#"
+                    style="width:0;height:0;border:0px solid #fff;"></iframe>
+
+            <script>
+
+                function removeFile() {
+
+                    $.fn.bssEventsUploadMarker.remove();
+
+                }
+
+                function updateEditView(html) {
+
+                    $.fn.bssEventsUploadMarker.append(html);
+
+                }
+
+                $(".file-upload").on("change", function (e) {
+
+                    var id = $(this).data('id');
+                    var target = $('tbody[data-appointmentid=' + id + ']');
+
+                    $.fn.bssEventsUploadMarker = target;
+
+                    $(this).parent().submit();
+
+
+                    $(this).val("");
+
+                });
+
+            </script>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Some Templates -->
+
+<div id="registration-template-container" style="display: none;">
+
+    <div class="panel panel-default mt-0 mr-0 mb-0 ml-0">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span><f:translate
+                    key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_registration.new"/></span>
+                <span class="pull-right" style="cursor: pointer;"
+                      onclick="$(this).parent().parent().parent().parent().parent().find('.registration-add-btn').show();$(this).parent().parent().parent().remove();">
+                            <i class="fa fa-minus-circle fa-2x" style="margin-top: -7px;"></i>
+                        </span>
+            </h3>
+        </div>
+        <div class="panel-body">
+            <label>
+                <f:translate
+                        key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_registration.isPublic"/>
+            </label><br/>
+            <input type="checkbox" class="toggle"
+                   name="tx_bssevents_p1[event][appointments][new%%%id%%%][registration][public]" value="1"/><br/>
+
+            <label>
+                <f:translate
+                        key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_registration.additionalInformation"/>
+            </label><br/>
+            <textarea rows="6" name="tx_bssevents_p1[event][appointments][new%%%id%%%][registration][message]"/><br/>
+
+        </div>
+    </div>
+</div>
+
+
+<div id="appointment-template-container" data-language="{language}" style="display: none;">
+
+    <div class="panel panel-default" data-appointmentid="new%%%id%%%">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span><f:translate
+                    key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_appointment.new"/></span>
+                <span class="pull-right" style="cursor: pointer;"
+                      onclick="$(this).parent().parent().parent().remove();">
+                            <i class="fa fa-minus-circle fa-2x" style="margin-top: -7px;"></i>
+                        </span>
+            </h3>
+        </div>
+        <div class="panel-body">
+            <label>
+                <f:translate
+                        key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_appointment.date_from"/>
+            </label><br/>
+            <f:form.textfield id="datetimepickerFrom%%%id%%%"
+                              name="tx_bssevents_p1[event][appointments][new%%%id%%%][dateFrom]"/>
+            <br/>
+
+            <label>
+                <f:translate
+                        key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_appointment.date_to"/>
+            </label><br/>
+            <f:form.textfield id="datetimepickerTo%%%id%%%"
+                              name="tx_bssevents_p1[event][appointments][new%%%id%%%][dateTo]"/>
+            <br/>
+
+            <hr/>
+
+            <label>
+                <f:translate
+                        key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_appointment_exception.repeat_weekly"/>
+            </label><br/>
+            <input type="checkbox" class="toggle" name="tx_bssevents_p1[event][appointments][new%%%id%%%][repeatWeekly]"
+                   value="1"/><br/><br/>
+
+            <hr/>
+
+            <f:form.hidden name="tx_bssevents_p1[event][appointments][new%%%id%%%][state]" value="active"/>
+            <br/>
+
+            <!-- registration -->
+            <div class="panel panel-default mt-0 mr-0 mb-0 ml-0">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <span><f:translate
+                                key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_registration.registration"/></span>
+                        <span class="registration-add-btn pull-right" style="cursor: pointer;"
+                              onclick="$.fn.bssEventsAddRegistration($(this).parent().parent().parent().find('.registration-container'));$(this).hide();">
+                            <i class="fa fa-plus-circle fa-2x" style="margin-top: -7px;"></i>
+                        </span>
+                    </h3>
+                </div>
+                <div class="panel-body registration-container">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

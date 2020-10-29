@@ -1,0 +1,167 @@
+{namespace bss=Bermuda\BssEvents\ViewHelpers}
+
+<h4 class="modal-title pt-2 pb-2" xmlns:f="http://www.w3.org/1999/html">
+    <f:translate
+            key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_registration.registration"/>
+</h4>
+
+<br/>
+
+<div class="mb-3">
+    <f:translate
+            key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_registration.standard_text"/>
+</div>
+
+<f:if condition="{slots} !== 0">
+    <div class="registration-info">
+        <div id="information" class="panel-body information" style="position: relative;padding-left: 0px;">
+            <i class="registration-icon fa fa-info-circle fa-1x" aria-hidden="true"></i>
+            <f:format.raw>A maximum of {appointment.registration.slots} participants can register for this
+                event.
+            </f:format.raw>
+            <br>
+            <i class="registration-icon fa fa-info-circle fa-1x" aria-hidden="true"></i>
+            <f:format.raw>There are still {availableSlots} places left.</f:format.raw>
+
+        </div>
+    </div>
+</f:if>
+<f:if condition="{appointment.registration.message}">
+    <div class="registration-info mb-3">
+        <f:format.raw>{appointment.registration.message}</f:format.raw>
+    </div>
+</f:if>
+
+<div class="subscribe-fields">
+    <f:security.ifAuthenticated>
+        <button id="autoFillBtn" class="pull-right">
+            <f:translate key='LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents.autofill'/>
+        </button>
+        <br/><br/>
+    </f:security.ifAuthenticated>
+    <f:form id="bssEventsRegisterForm" extensionName="bssevents" pluginName="P1" controller="Event" action="subscribe"
+            enctype="multipart/form-data" name="subscriber" object="{subscriber}" method="get">
+
+
+        <div class="input-wrapper">
+            <f:form.textfield property="firstname" required="1"
+                              placeholder="<f:translate key='LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_subscriber.firstname' />*"
+            />
+        </div>
+        <div class="input-wrapper">
+            <f:form.textfield property="lastname" required="1"
+                              placeholder="<f:translate key='LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_subscriber.lastname' />*"
+            />
+        </div>
+        <div class="input-wrapper">
+            <f:form.textfield property="email" required="1"
+                              placeholder="<f:translate key='LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_subscriber.email' />*"
+                              type="email"
+            />
+        </div>
+        <div class="input-wrapper">
+            <f:form.textfield property="phone" required="1"
+                              placeholder="<f:translate key='LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_subscriber.phone' />*"
+                              type="tel"
+            />
+        </div>
+        <div class="input-wrapper">
+            <f:form.textfield property="street" required="1"
+                              placeholder="<f:translate key='LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_subscriber.street' /> / <f:translate key='LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_subscriber.number' />*"
+            />
+        </div>
+        <div class="city-zip">
+            <div class="zip-wrapper">
+                <f:form.textfield property="zip" required="1"
+                                  placeholder="<f:translate key='LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_subscriber.zip' />*"
+                />
+            </div>
+            <div class="city-wrapper">
+                <f:form.textfield property="city" required="1"
+                                  placeholder="<f:translate key='LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_subscriber.city' />*"
+                />
+            </div>
+        </div>
+        <div class="input-wrapper">
+            <f:form.textarea property="message"
+                             placeholder="<f:translate key='LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_subscriber.message' />"
+                             rows="6"
+                             title="<f:translate key='LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_subscriber.message' />"/>
+        </div>
+        <div class="input-wrapper">
+
+            <f:form.hidden property="appointment" value="{appointment}"/>
+
+            <div class="mandatory-field-notice">
+                *
+                <f:translate
+                        key='LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_subscriber.required_fields'/>
+            </div>
+            <f:security.ifAuthenticated>
+                <f:if condition="{settings.bssEvents.main.update_user_data}">
+                <input type="checkbox" class="user-info-check" name="tx_bssevents_p1[updatedata]" value="1"
+                       style="width: 20px;float: left;margin-right: 10px;">
+                <label for="updateData" class="user-info-check-label">
+                    <f:translate
+                            key='LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents.updateuserdata'/>
+                </label>
+                </f:if>
+            </f:security.ifAuthenticated>
+
+        </div>
+
+        <f:form.button type="submit" id="submit-registration-form">
+            <f:translate
+                    key='LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_subscriber.register'/>
+        </f:form.button>
+
+    </f:form>
+
+</div>
+
+<script type="application/javascript">
+    // $(function () {
+    //     $('#submit-registration-form').attr('disabled', 'disabled');
+    //     $('#accept').click(function () {
+    //         if ($(this).is(':checked')) {
+    //             $('#submit-registration-form').removeAttr('disabled');
+    //         } else {
+    //             $('#submit-registration-form').attr('disabled', 'disabled');
+    //
+    //         }
+    //     });
+    // });
+    /*
+    $('#submit-registration-form').click(function(){
+        if ($('#accept').is(':checked')) {
+
+        } else {
+            $('.acceptbox').css('background','red');
+        }
+    });
+    */
+
+
+    $("#bssEventsRegisterForm").on('submit', function (e) {
+
+        if ($(this).valid() == true) {
+            var url = $(this).attr('action');
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: $(this).serialize(),
+                success: function (data) {
+                    alert(data['message']);
+                    $("#bssEventsRegisterForm").trigger("reset");
+                }
+            });
+
+            e.preventDefault();
+        }
+        return false;
+
+
+    })
+</script>
+

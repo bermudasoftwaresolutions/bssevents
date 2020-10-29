@@ -1,0 +1,34 @@
+{
+  "name": "bermuda/typo3-bss-events",
+  "description": "Typo3 Event and Calendar Extension",
+  "type": "typo3-cms-extension",
+  "license": "GPL-3.0-or-later",
+  "keywords": ["TYPO3", "CMS", "typo3", "calendar", "event"],
+  "support": {
+    "issues": "https://gitlab.bermuda-software.ch/bss_public/typo3/bss_events/issues"
+  },
+  "replace": {
+    "bss_events": "self.version",
+    "typo3-ter/bss-events": "self.version"
+  },
+  "require": {
+    "typo3/cms-core": ">=8.7.0 <=9.9.999",
+    "typo3/cms-frontend": ">=8.7.0 <=9.9.999",
+    "typo3/cms-felogin": ">=8.7.0 <=9.9.999",
+    "php": ">=7.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Bermuda\\BssEvents\\": "Classes"
+    },
+    "classmap": [
+      "Classes/Libraries/PHPExcel/"
+    ]
+  },
+  "authors": [
+    {
+      "name": "Samuel Breu",
+      "email": "samuel.breu@bermuda-software.ch"
+    }
+  ]
+}

@@ -1,0 +1,255 @@
+body {
+    background-color: #fff;
+    color: #000;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    scrollbar-3dlight-color: #f0f0ee;
+    scrollbar-arrow-color: #676662;
+    scrollbar-base-color: #f0f0ee;
+    scrollbar-darkshadow-color: #ddd;
+    scrollbar-face-color: #e0e0dd;
+    scrollbar-highlight-color: #f0f0ee;
+    scrollbar-shadow-color: #f0f0ee;
+    scrollbar-track-color: #f5f5f5
+}
+
+td, th {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 11px
+}
+
+.mce-content-body .mce-reset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    vertical-align: top;
+    background: transparent;
+    text-decoration: none;
+    color: black;
+    font-family: Arial;
+    font-size: 11px;
+    text-shadow: none;
+    float: none;
+    position: static;
+    width: auto;
+    height: auto;
+    white-space: nowrap;
+    cursor: inherit;
+    line-height: normal;
+    font-weight: normal;
+    text-align: left;
+    -webkit-tap-highlight-color: transparent;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    direction: ltr;
+    max-width: none
+}
+
+.mce-object {
+    border: 1px dotted #3a3a3a;
+    background: #d5d5d5 url(img/object.gif) no-repeat center
+}
+
+.mce-preview-object {
+    display: inline-block;
+    position: relative;
+    margin: 0 2px 0 2px;
+    line-height: 0;
+    border: 1px solid gray
+}
+
+.mce-preview-object .mce-shim {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+}
+
+figure.align-left {
+    float: left
+}
+
+figure.align-right {
+    float: right
+}
+
+figure.image.align-center {
+    display: table;
+    margin-left: auto;
+    margin-right: auto
+}
+
+figure.image {
+    display: inline-block;
+    border: 1px solid gray;
+    margin: 0 2px 0 1px;
+    background: #f5f2f0
+}
+
+figure.image img {
+    margin: 8px 8px 0 8px
+}
+
+figure.image figcaption {
+    margin: 6px 8px 6px 8px;
+    text-align: center
+}
+
+.mce-preview-object[data-mce-selected] .mce-shim {
+    display: none
+}
+
+.mce-pagebreak {
+    cursor: default;
+    display: block;
+    border: 0;
+    width: 100%;
+    height: 5px;
+    border: 1px dashed #666;
+    margin-top: 15px;
+    page-break-before: always
+}
+
+@media print {
+    .mce-pagebreak {
+        border: 0
+    }
+}
+
+.mce-item-anchor {
+    cursor: default;
+    display: inline-block;
+    -webkit-user-select: all;
+    -webkit-user-modify: read-only;
+    -moz-user-select: all;
+    -moz-user-modify: read-only;
+    user-select: all;
+    user-modify: read-only;
+    width: 9px !important;
+    height: 9px !important;
+    border: 1px dotted #3a3a3a;
+    background: #d5d5d5 url(img/anchor.gif) no-repeat center
+}
+
+.mce-nbsp, .mce-shy {
+    background: #aaa
+}
+
+.mce-shy::after {
+    content: '-'
+}
+
+hr {
+    cursor: default
+}
+
+.mce-match-marker {
+    background: #aaa;
+    color: #fff
+}
+
+.mce-match-marker-selected {
+    background: #39f;
+    color: #fff
+}
+
+.mce-spellchecker-word {
+    border-bottom: 2px solid #f00;
+    cursor: default
+}
+
+.mce-spellchecker-grammar {
+    border-bottom: 2px solid #008000;
+    cursor: default
+}
+
+.mce-item-table, .mce-item-table td, .mce-item-table th, .mce-item-table caption {
+    border: 1px dashed #bbb
+}
+
+td[data-mce-selected], th[data-mce-selected] {
+    background-color: #39f !important
+}
+
+.mce-edit-focus {
+    outline: 1px dotted #333
+}
+
+.mce-content-body *[contentEditable=false] *[contentEditable=true]:focus {
+    outline: 2px solid #2d8ac7
+}
+
+.mce-content-body *[contentEditable=false] *[contentEditable=true]:hover {
+    outline: 2px solid #7acaff
+}
+
+.mce-content-body *[contentEditable=false][data-mce-selected] {
+    outline: 2px solid #2d8ac7
+}
+
+.mce-resize-bar-dragging {
+    background-color: blue;
+    opacity: .25;
+    filter: alpha(opacity=25);
+    zoom: 1
+}
+
+/* changes for heading v1 */
+body { counter-reset: h1 h2; }
+
+h1.count {counter-reset: h2}
+h2.count {counter-reset: h3}
+h3.count {counter-reset: h4}
+
+.mce-content-body {font-size: 10.5pt; font-weight: normal; margin: 0;}
+
+
+h1.count:before { counter-increment: h1; content: counter(h1, upper-roman) ". "; }
+h1.count { font-size: 12pt; font-weight: bold;  }
+
+h2.count:before { counter-increment: h2; content: counter(h2) ". "; min-width: 1.5cm; }
+h2.count { font-size: 10.5pt; font-weight: normal; margin: 0px; display: flex; }
+
+h3.count:before { counter-increment: h3; content: counter(h2) "." counter(h3) ". "; min-width: 1.5cm; }
+h3.count { font-size: 10.5pt; font-weight: normal; margin: 0px; display:flex; }
+
+h4.count:before { counter-increment: h4; content: counter(h2) "." counter(h3) "." counter(h4) ". "; min-width: 1.5cm; }
+h4.count { font-size: 10.5pt; font-weight: normal; margin: 0px; display:flex; }
+
+h5.count:before { content: " "; min-width: 1.5cm; }
+h5.count { font-size: 10.5pt; font-weight: normal; margin: 0px; display:flex; }
+
+h6.count:before { content: "\2022"; min-width: 0.7cm; padding-left: 1.5cm }
+h6.count { font-size: 10.5pt; font-weight: normal; margin: 0px; display:flex; }
+
+/* changes for heading v2 */
+body { counter-reset: h21 h22 h23; }
+
+h1.tiny20 {counter-reset: h22}
+h4.tiny20 {counter-reset: h23}
+
+h1.tiny20:before { counter-increment: h21; content: counter(h21, upper-alpha) ". "; min-width: 0.8cm; }
+h1.tiny20 { font-size: 11pt; font-weight: bold; display: flex; margin:0; padding-bottom: 11pt; }
+
+h2.tiny20 { font-size: 11pt; font-weight: bold; text-align: center; margin: 0; padding-top: 22pt; padding-bottom: 22pt; }
+
+h3.tiny20 { font-size: 11pt; font-weight: bold; margin:0; padding-bottom: 11pt; }
+
+h4.tiny20:before { counter-increment: h22; content: counter(h22) ". "; min-width: 0.8cm; }
+h4.tiny20 { font-size: 11pt; font-weight: normal; margin: 0px; padding-bottom: 11pt; display: flex; }
+
+h5.tiny20:before { counter-increment: h23; content: counter(h22) "." counter(h23) " "; min-width: 1cm; padding-left: 0.8cm; }
+h5.tiny20 { font-size: 11pt; font-weight: normal; margin: 0px; padding-bottom: 11pt; display:flex; display:flex; }
+
+h6.tiny20:before { content: "\2212"; min-width: 0.8cm; }
+h6.tiny20 { font-size: 11pt; font-weight: normal; margin: 0px; display:flex; }
+
+h1.tiny21:before { content: "\2022"; min-width: 0.5cm; padding-left: 0.8cm; }
+h1.tiny21 { font-size: 11pt; font-weight: normal; margin: 0px; display:flex; }
+
+
+.noFlex { display: inline-block; }

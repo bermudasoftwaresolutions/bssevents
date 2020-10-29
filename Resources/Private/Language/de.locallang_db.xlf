@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" product-name="bss_events">
+        <header/>
+        <body>
+
+            <trans-unit id="tx_bssevents_event.months.1">
+                <source>January</source>
+                <target>Januar</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_event.months.2">
+                <source>February</source>
+                <target>Februar</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_event.months.3">
+                <source>March</source>
+                <target>März</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_event.months.4">
+                <source>April</source>
+                <target>April</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_event.months.5">
+                <source>May</source>
+                <target>Mai</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_event.months.6">
+                <source>June</source>
+                <target>Juni</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_event.months.7">
+                <source>July</source>
+                <target>Juli</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_event.months.8">
+                <source>August</source>
+                <target>August</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_event.months.9">
+                <source>September</source>
+                <target>September</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_event.months.10">
+                <source>October</source>
+                <target>Oktober</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_event.months.11">
+                <source>November</source>
+                <target>November</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_event.months.12">
+                <source>December</source>
+                <target>Dezember</target>
+            </trans-unit>
+
+            <trans-unit id="tx_bssevents_event.recurringappointments">
+                <source>Recurring Appointments</source>
+                <target>Wiederholende Termine</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_event.active">
+                <source>Active</source>
+                <target>Aktiv</target>
+            </trans-unit>
+
+            <trans-unit id="tx_bssevents_appointment_exception.exceptions">
+                <source>Date Exceptions</source>
+                <target>Ausnahmedatum</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_appointment_exception.repeat_weekly">
+                <source>Repeat Weekly</source>
+                <target>Wöchentlich wiederholen</target>
+            </trans-unit>
+
+            <trans-unit id="tx_bssevents_event.edit">
+                <source>Edit event</source>
+                <target>Event bearbeiten</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_event.edit_success">
+                <source>Event successfully edited</source>
+                <target>Event erfolgreich bearbeitet</target>
+            </trans-unit>
+
+            <trans-unit id="tx_bssevents_event.delete_success">
+                <source>Event successfully removed</source>
+                <target>Event wurde erfolgreich entfernt</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_event.ask_delete">
+                <source>Should this event really be deleted?</source>
+                <target>Soll dieser Event wirklich gelöscht werden?</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_event.delete_permission">
+                <source>Insufficient permission to delete!</source>
+                <target>Unzureichende Berechtigung zum löschen!</target>
+            </trans-unit>
+
+            <trans-unit id="tx_bssevents_event.create">
+                <source>Create new event</source>
+                <target>Neuen Event erstellen</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_event.send">
+                <source>Submit</source>
+                <target>Absenden</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_event.create_success">
+                <source>Event created successful</source>
+                <target>Der Event wurde erfolgreich angelegt</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_event.no_rights">
+                <source>You have no rights to create an event</source>
+                <target>Sie haben keine Rechte um einen Event anzulegen</target>
+            </trans-unit>
+
+            <trans-unit id="tx_bssevents_registration.registration">
+                <source>Registration</source>
+                <target>Anmeldung</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_registration.public">
+                <source>Public registration</source>
+                <target>Öffentliche Anmeldung</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_registration.close">
+                  <source>Registration is closed</source>
+                  <target>Anmeldung schliessen</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_registration.message">
+                <source>Registration information</source>
+                <target>Registrations Informationen</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_registration.appointment">
+                <source>Appointment</source>
+                <target>Termin</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_registration.ispublic">
+                <source>Public</source>
+                <target>Öffentliche</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_registration.isnotpublic">
+                <source>Private</source>
+                <target>Private</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_registration.standard_text">
+                <source>Here you can register online for this event.</source>
+                <target>Hier können Sie sich für diese Veranstaltung online anmelden.</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_registration.new">
+                <source>New registration</source>
+                <target>Neue Anmeldung</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_registration.isPublic">
+                <source>Registration is public accessible</source>
+                <target>Die Anmeldung ist öffentlich zugänglich</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_registration.additionalInformation">
+                <source>Additional registration informations</source>
+                <target>Zusätzliche Anmeldungsinformationen</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_registration.addSlots">
+                <source>Limit the number of participants</source>
+                <target>Beschränken Sie die Anzahl der Teilnehmer</target>
+            </trans-unit>
+
+             <trans-unit id="tx_bssevents.autofill">
+                 <source>Autofill</source>
+                 <target>Automatisch ausfüllen</target>
+             </trans-unit>
+
+            <trans-unit id="tx_bssevents.updateuserdata">
+                <source>I would like to update my deposited data based on the above input</source>
+                <target>Ich wünsche eine Aktualisierung meiner hinterlegten Daten anhand der obigen Eingabe</target>
+            </trans-unit>
+
+            <trans-unit id="tx_bssevents_subscriber.appointment">
+                <source>Appointment</source>
+                <target>Termin</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_subscriber.creator">
+                <source>Creator</source>
+                <target>Ersteller</target>
+            </trans-unit>
+
+
+            <trans-unit id="tx_bssevents_navigation.close">
+                <source>Close</source>
+                <target>Schliessen</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_user.unknown">
+                <source>This subscription is not created by a known user.</source>
+                <target>Die Anmeldung wurde nicht von einem registrierten Benutzer erfasst.</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_user.known">
+                <source>This subscription has been created by %1$s.</source>
+                <target>Die Anmeldung wurde von %1$s erstellt.</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_user.invalid">
+                <source>The creator user-id %1$s could not be found in database.</source>
+                <target>Die Ersteller-Benutzer-ID %1$s konnte in der Datenbank nicht gefunden werden.</target>
+            </trans-unit>
+
+
+            <trans-unit id="tx_bssevents_event.event">
+                <source>Event</source>
+                <target>Event</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_event.title">
+                <source>Title</source>
+                <target>Titel</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_event.venue">
+                <source>Venue</source>
+                <target>Ort</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_event.organizer">
+                <source>Organizer</source>
+                <target>Organisator</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_event.content">
+                <source>Content</source>
+                <target>Inhalt</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_event.state">
+                <source>State</source>
+                <target>Status</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_event.state.new">
+                <source>New</source>
+                <target>Neu</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_event.state.active">
+                <source>Active</source>
+                <target>Aktiv</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_event.state.archived">
+                <source>Archived</source>
+                <target>Archiviert</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_event.categories">
+                <source>Categories</source>
+                <target>Kategorien</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_event.appointments">
+                <source>Appointments</source>
+                <target>Termine</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_event.image">
+                <source>Image</source>
+                <target>Bild</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_event.attach">
+                <source>Attach</source>
+                <target>Anhänge</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_event.time">
+                <source>Time</source>
+                <target>Zeit</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_event.date">
+                <source>Date</source>
+                <target>Datum</target>
+            </trans-unit>
+
+
+            <trans-unit id="tx_bssevents_appointment.appointment">
+                <source>Event Appointment</source>
+                <target>Event Termin</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_appointment.date_from">
+                <source>Start date</source>
+                <target>Start-Datum</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_appointment.date_to">
+                <source>End date</source>
+                <target>End-Datum</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_appointment.state">
+                <source>State</source>
+                <target>Status</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_appointment.state.new">
+                <source>New</source>
+                <target>Neu</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_appointment.state.active">
+                <source>Active</source>
+                <target>Aktiv</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_appointment.state.archived">
+                <source>Archived</source>
+                <target>Archiviert</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_appointment.state.disabled">
+                <source>Disabled</source>
+                <target>Deaktiviert</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_appointment.datesetting">
+                <source>Configuration</source>
+                <target>Konfiguration</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_appointment.new">
+                <source>New appointment</source>
+                <target>Neuer Termin</target>
+            </trans-unit>
+
+
+            <trans-unit id="tx_bssevents_category.category">
+                <source>Event Category</source>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_category.title">
+                <source>Title</source>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_category.color">
+                <source>Color</source>
+            </trans-unit>
+
+
+            <trans-unit id="tx_bssevents_datesetting.datesetting">
+                <source>Event Datesetting</source>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_datesetting.repeat">
+                <source>Repeat</source>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_datesetting.repeat_type">
+                <source>Repeat Type</source>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_datesetting.end_date">
+                <source>End Date</source>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_datesetting.repeat.daily">
+                <source>Daily</source>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_datesetting.repeat.weekly">
+                <source>Weekly</source>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_datesetting.repeat.monthly">
+                <source>Monthly</source>
+            </trans-unit>
+
+
+            <trans-unit id="tx_bssevents_eventoption.eventoption">
+                <source>Eventoption</source>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_eventoption.title">
+                <source>Title</source>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_eventoption.type">
+                <source>Type</source>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_eventoption.values">
+                <source>Values</source>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_eventoption.selection">
+                <source>Selection</source>
+            </trans-unit>
+
+
+            <trans-unit id="tx_bssevents_subscriber.subscriber">
+                <source>Subscriber</source>
+                <target>Teilnehmer</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_subscriber.firstname">
+                <source>Firstname</source>
+                <target>Vorname</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_subscriber.lastname">
+                <source>Lastname</source>
+                <target>Nachname</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_subscriber.email">
+                <source>Email</source>
+                <target>E-Mail</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_subscriber.phone">
+                <source>Phone</source>
+                <target>Telefon</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_subscriber.street">
+                <source>Street</source>
+                <target>Strasse</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_subscriber.number">
+                <source>Nr.</source>
+                <target>Nr.</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_subscriber.zip">
+                <source>Zip</source>
+                <target>PLZ</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_subscriber.city">
+                <source>City</source>
+                <target>Ort</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_subscriber.driver">
+                <source>Registration</source>
+                <target>Anmeldung</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_subscriber.mobile">
+                <source>Mobile-Nr.</source>
+                <target>Mobile-Nr.</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_subscriber.message">
+                <source>Message</source>
+                <target>Mitteilung</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_subscriber.register">
+                <source>Register</source>
+                <target>Anmelden</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_subscriber.required_fields">
+                <source>Required fields</source>
+                <target>Pflichtfelder</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_subscriber.success">
+                <source>You have successfully registered</source>
+                <target>Sie haben sich erfolgreich angemeldet</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_subscriber.error">
+                <source>Your registration failed</source>
+                <target>Ihre Anmeldung ist fehlgeschlagen</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_event.files.files">
+                <source>Files</source>
+                <target>Dateien</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_event.files.name">
+                <source>Name</source>
+                <target>Name</target>
+            </trans-unit>
+            <trans-unit id="tx_bssevents_event.files.delete">
+                <source>Delete</source>
+                <target>Löschen</target>
+            </trans-unit>
+
+        </body>
+    </file>
+</xliff>

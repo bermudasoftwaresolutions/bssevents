@@ -1,0 +1,95 @@
+{namespace bss=Bermuda\BssEvents\ViewHelpers}
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-6">
+
+            <f:if condition="{year.isDayDetail}">
+                <f:then>
+                    <div class="bss_calendar_topmenu_item">
+                        <f:link.action controller="Event" action="show" arguments="{date:year.year, year:'same', style:'cal', cat:month.cat}"><i class="fa fa-calendar" aria-hidden="true"></i></f:link.action>
+                    </div>
+
+                    <div class="bss_calendar_topmenu_item">
+                        <f:link.action controller="Event" action="show" arguments="{date:year.year, year:'same', style:'yearlist', cat:month.cat}"><i class="fa fa-list" aria-hidden="true"></i></f:link.action>
+                    </div>
+
+                    <div class="bss_calendar_topmenu_item active">
+                        <i class="fa fa-search-plus" aria-hidden="true"></i>
+                    </div>
+                </f:then>
+                <f:else>
+                    <div class="bss_calendar_topmenu_item">
+                        <f:link.action controller="Event" action="show" arguments="{date:year.year, year:'same', style:'cal', cat:month.cat}"><i class="fa fa-calendar" aria-hidden="true"></i></f:link.action>
+                    </div>
+
+                    <div class="bss_calendar_topmenu_item active">
+                        <i class="fa fa-list" aria-hidden="true"></i>
+                    </div>
+                </f:else>
+            </f:if>
+            <f:if condition="{showCreateBtn}">
+                <div class="bss_calendar_topmenu_item">
+                    <f:link.action id="createEvent" controller="Event" action="create"><i class="fa fa-plus" aria-hidden="true"></i></f:link.action>
+                </div>
+            </f:if>
+
+        </div>
+    </div>
+    <div class="bss_calendar">
+        <div class="bss_calendar_top">
+            <div class="row" style="min-height: 27px;">
+                <div class="col-4 pr-0">
+                    <span class="pull-left year-nav">
+                        <f:if condition="!{year.isDayDetail}">
+                            <f:link.action controller="Event" action="show" arguments="{date:year.year, year:'prev', style:'list', cat:month.cat}"><span class="arrow-prev-next"><</span><span class="prev-year"> {bss:previousNextYear(year: '{year.title}', prevNext: '1')}</span></f:link.action>
+                        </f:if>
+                    </span>
+                </div>
+                <div class="col-4 text-center pr-0 pl-0">
+                    <span>{year.title}</span>
+                </div>
+                <div class="col-4 pl-0">
+                    <span class="pull-right year-nav">
+                        <f:if condition="!{year.isDayDetail}">
+                            <f:link.action controller="Event" action="show" arguments="{date:year.year, year:'next', style:'list', cat:month.cat}"><span class="next-year">{bss:previousNextYear(year: '{year.title}', prevNext: '-1')} </span><span class="arrow-prev-next">></span></f:link.action>
+                        </f:if>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <f:if condition="{settings.bssEvents.main.access_to_details}">
+                <f:then>
+                    <f:for each="{year.appointments}" as="appointment">
+                        <f:link.action class="bss-event-detail-link" action="detail" arguments="{appointment:appointment}">
+                            <div data-title="{appointment.event.title}">
+                                <div class="col-md-12 bss_calendar_day_list_row" style="border-left: 8px solid {appointment.color}; padding-left: 5px; margin-top: 20px; margin-bottom: 20px;">
+                                    <div class="bss_calendar_day_title">{appointment.listTitle}</div>
+                                    <div class="bss_calendar_day_title">{appointment.event.title}</div>
+                                    <f:if condition="{user}">
+                                        <div style="max-height: 25px; padding-left: 3px; display: block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;"><f:format.html><f:format.crop maxCharacters="200">{appointment.event.previewBody}</f:format.crop></f:format.html></div>
+                                    </f:if>
+                                </div>
+                            </div>
+                        </f:link.action>
+                    </f:for>
+                </f:then>
+                <f:else>
+                    <f:for each="{year.appointments}" as="appointment">
+                            <div data-title="{appointment.event.title}">
+                                <div class="col-md-12 bss_calendar_day_list_row" style="border-left: 8px solid {appointment.color}; padding-left: 5px; margin-top: 20px; margin-bottom: 20px;">
+                                    <div class="bss_calendar_day_title">{appointment.listTitle}</div>
+                                    <div class="bss_calendar_day_title">{appointment.event.title}</div>
+                                    <f:if condition="{user}">
+                                        <div style="max-height: 25px; padding-left: 3px; display: block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;"><f:format.html><f:format.crop maxCharacters="200">{appointment.event.previewBody}</f:format.crop></f:format.html></div>
+                                    </f:if>
+                                </div>
+                            </div>
+                    </f:for>
+                </f:else>
+            </f:if>
+        </div>
+        <div class="bss_calendar_bot"></div>
+    </div>
+</div>

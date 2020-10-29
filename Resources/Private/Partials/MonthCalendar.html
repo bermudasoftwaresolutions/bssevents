@@ -1,0 +1,50 @@
+{namespace bss=Bermuda\BssEvents\ViewHelpers}
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-6">
+
+            <div class="bss_calendar_topmenu_item active">
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+            </div>
+
+            <div class="bss_calendar_topmenu_item">
+                <f:link.action controller="Event" action="show" arguments="{date:month.monthString, month:'same', style:'list', cat:month.cat}"><i class="fa fa-list" aria-hidden="true"></i></f:link.action>
+            </div>
+
+            <f:if condition="{showCreateBtn}">
+                <div class="bss_calendar_topmenu_item">
+                    <f:link.action id="createEvent" controller="Event" action="create"><i class="fa fa-plus" aria-hidden="true"></i></f:link.action>
+                </div>
+            </f:if>
+
+        </div>
+    </div>
+    <div class="bss_calendar">
+	    <div class="col-md-12">
+        <div class="bss_calendar_top row">
+            
+                <div class="col-3">
+                    <span class="pull-left month-nav">
+                        <f:link.action controller="Event" class="arrow-prev-next" action="show" arguments="{date:month.monthString, month:'prev', style:'cal', cat:month.cat}"><</f:link.action>
+                    </span>
+                </div>
+                <div class="col-6 text-center">
+                    <span>{month.title}</span>
+                </div>
+                <div class="col-3">
+                    <span class="pull-right month-nav">
+                        <f:link.action controller="Event" class="arrow-prev-next" action="show" arguments="{date:month.monthString, month:'next', style:'cal', cat:month.cat}">></f:link.action>
+                    </span>
+                </div>
+            
+        </div>
+        <div class="bss_calendar_main row">
+            <f:for each="{month.days}" as="day">
+                <f:render partial="CalendarDay" arguments="{day:day}"/>
+            </f:for>
+        </div>
+        <div class="bss_calendar_bot row"></div>
+	    </div>
+    </div>
+</div>

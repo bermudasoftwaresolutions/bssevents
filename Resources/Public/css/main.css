@@ -1,0 +1,453 @@
+#contentent {
+    /*border: 1px dotted orangered;*/
+}
+
+/* starting styling calendar */
+
+.bss_calendar_day {
+    position: relative;
+    margin: 1px;
+    width: 120px;
+    height: 120px;
+    float: left;
+    color: #343434;
+    border-bottom: 1px solid #9eafd4;
+    border-right: 1px solid #9eafd4;
+    transition: background-color 0.6s linear;
+    padding: 5px;
+}
+
+.bss_calendar a, .bss_calendar a:hover {
+    color: #5f697f;
+    text-decoration: none
+}
+
+.bss_calendar .month-nav a, .bss_calendar .month-nav a:hover{
+    color: white;
+}
+
+.bss_calendar_day:hover {
+    background-color: #cfd7ea;
+}
+
+.bss_calendar_day_title {
+    font-size: 10pt;
+    font-weight: 600;
+    color: #343434;
+    padding-left: 3px;
+}
+
+.bss_calendar_top {
+    background-color: #9eafd4;
+    padding-top: 4px;
+    color: #ffffff;
+}
+
+.bss_calendar_top a { color:#fff; }
+
+.bss_calendar_top span {
+    font-size: small;
+    font-weight: 700;
+    margin: 5px;
+}
+
+.bss_calendar_topmenu_item {
+    display: inline-block;
+    padding: 5px;
+    border: 1px solid #9eafd4;
+    margin-bottom: -1px;
+    cursor: auto;
+    text-align: center;
+    min-width: 50px;
+}
+
+.bss_calendar_topmenu_item:not(.active) {
+    cursor: pointer;
+}
+
+.bss_calendar_topmenu_item.active {
+    background-color: #9eafd4;
+}
+
+.bss_calendar_topmenu_item:not(:first-child) {
+    border-left: 0;
+    margin-left: -5px;
+}
+
+.bss_calendar_topmenu_item .fa {
+    display: inline-block;
+    padding: 2px;
+    color: #9eafd4;
+    font-size: 16pt;
+}
+
+.bss_calendar_topmenu_item.active .fa {
+    color: #ffffff;
+}
+
+.categories_row div div { padding: 10px; display: inline-block; }
+.categories_row div { margin-top: 10px; }
+
+.plus_count {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    color: white;
+    border-radius: 100%;
+    border: 2px solid white;
+    padding: 4px;
+    background-color: black;
+    font-size: 12pt;
+    font-weight: bold;
+    font-family: Helvetica, sans-serif;
+}
+
+.bss_calendar_day_list_row {
+    transition: background-color 0.6s linear;
+}
+
+.bss_calendar_day_list_row:hover {
+    background-color: rgba(211,212,252,1);
+}
+
+#bssEventModal {
+    padding-left: 0!important;
+}
+
+#bssEventModal .modal-header { border-bottom: 0;}
+#events-detail-modal-header-table tr td {
+    padding: 0;
+}
+
+#bssEventModal .modal-footer .btn {
+    padding: 6px 12px;
+    border: 1px solid transparent;
+    font-size: 14px;
+}
+
+#bssEventModal .modal-footer .btn-default {
+    background: rgb(255,255,255);
+    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(222,222,222,1) 100%);
+    text-shadow: 0 1px 0 #fff;
+    border-color: #ccc;
+    transition: 0.3s;
+}
+
+#bssEventModal .modal-footer .btn-default:hover {
+    background: rgb(222,222,222);
+    background: linear-gradient(0deg, rgba(222,222,222,1) 0%, rgba(255,255,255,1) 100%);
+    border-color: #adadad;
+}
+
+#bssEventModal .panel {
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    margin: 20px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+
+#bssEventModal .panel-default>.panel-heading {
+    color: #333;
+    background-color: #f5f5f5;
+    padding: 10px 15px;
+    border-bottom: 1px solid #ddd;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+}
+
+#bssEventModal .panel-default {
+    border-color: #ddd;
+}
+
+#bssEventModal .panel-body {
+    padding: 20px;
+}
+
+#bssEventModal .panel-body.information {
+    padding-top: 2px;
+}
+
+#bssEventModal .panel-title .pull-right {
+    font-size: 18px;
+    position: relative;
+    top: 10px;
+
+}
+
+.subscribe-fields label {
+    margin-bottom: 3px;
+    margin-top: 5px;
+}
+
+.subscribe-fields .toggle-group label {
+    margin: 0;
+}
+
+.subscribe-fields .toggle.btn {
+    margin-bottom: 10px;
+}
+
+.registration-info > div {
+    position: relative;
+}
+
+.registration-info > div > i {
+    position: absolute;
+    top: -13px;
+    left: 10px;
+    background: white;
+}
+
+.registration-icon {
+    margin-right: 5px;
+}
+
+.user-info-check {
+    margin-top: 5px;
+}
+
+.subscribe-fields .user-info-check-label {
+    width: 90%;
+    margin-bottom: 30px;
+    margin-top: 0;
+}
+
+.subscribe-fields input, .subscribe-fields textarea, .subscribe-fields select{
+    border: 0;
+    background: #9eafd4;
+    padding: 5px;
+    width: 100%;
+    color: #000;
+    margin-bottom: 3px;
+    max-width: 100%;
+}
+
+.subscribe-fields button{
+    border: 0;
+    background: #5e667f;
+    color: #fff;
+    padding: 4px 15px;
+}
+
+.donthover:hover {
+    text-decoration: none;
+}
+
+.slots {
+    display: none;
+    width: 50%;
+}
+
+.visible .slots {
+    display: inline-block!important;
+    width: 15%!important;
+    margin-left: 15px;
+    margin-bottom: 0;
+}
+
+.toggle-add-slots {
+    display: inline-block;
+}
+
+.add-slots-label {
+    margin-top: 10px;
+}
+
+input.slots {
+    position: relative;
+    top: -3px;
+    min-width: 60px;
+}
+
+.visible {
+    display: inline-block!important;
+    width: 15%!important;
+    margin-left: 15px;
+    margin-bottom: 0;
+}
+
+.no-slots-wrapper {
+    position: relative;
+    height: 50px;
+}
+
+#bssEventModal #event-detail-content img{
+    max-width: 100%;
+}
+
+.image-wrapper {
+    padding: 0 10px 10px 0;
+}
+
+.donthover, #event-file-content a, .removeFile {
+    color: #5f697f;
+}
+
+.donthover:hover, .removeFile:hover {
+    color: #5f697f;
+}
+
+.bss_calendar_topmenu_item a {
+    color: #9eafd4;
+    padding: 5px 10px;
+}
+
+.bss_calendar_topmenu_item a:hover {
+    color: #9eafd4;
+}
+
+.bss_calendar_topmenu_item.active {
+    color: #ffffff;
+}
+
+.categories_row a { text-decoration: none; }
+
+.bss_calendar_day_list_row { padding-top: 4px; padding-bottom: 1px; }
+.bss_calendar_main { border-left:1px solid #9eafd4; }
+.categories_row { margin-left: 15px; }
+
+#bssEventModal .modal-dialog { max-width: 100%; }
+
+#bssEventModal .acceptbox { display: flex; }
+
+#bssEventsRegisterForm ::-webkit-input-placeholder {
+    color: #ffffff;
+}
+#bssEventsRegisterForm :-moz-placeholder {
+    color: #ffffff;
+}
+#bssEventsRegisterForm ::-moz-placeholder {
+    color: #ffffff;
+}
+#bssEventsRegisterForm :-ms-input-placeholder {
+    color: #ffffff;
+}
+
+.acceptbox input {
+    margin-bottom: 0;
+    margin-top: 7px;
+}
+
+#bssEventsRegisterForm label.error {
+    position: absolute;
+    top: 7px;
+    right: 10px;
+    color: red;
+    font-size: 14px;
+}
+
+#bssEventsRegisterForm .input-wrapper {
+    position: relative;
+}
+
+#bssEventsRegisterForm .city-zip {
+    display: block;
+}
+
+#bssEventsRegisterForm .zip-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 19%;
+}
+
+#bssEventsRegisterForm .city-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 80%;
+}
+
+
+.bss_calendar_top .arrow-prev-next {
+    font-size: 24px;
+    line-height: 0.7;
+}
+
+.bss_calendar_top .prev-year {
+    position: relative;
+    top: -3px;
+    left: -9px;
+
+}
+
+.bss_calendar_top .next-year {
+    position: relative;
+    top: -3px;
+    left: 10px;
+
+}
+
+.mandatory-field-notice {
+    margin-bottom: 10px;
+}
+
+@media (max-width: 374px) {
+    #event-file-content .table th, #event-file-content .table td{
+        padding: 5px;
+    }
+
+    .subscribe-fields .user-info-check-label {
+        width: 87%;
+    }
+}
+
+@media (max-width: 425px) {
+    #bssEventModal .panel-body {
+        padding: 10px;
+    }
+
+    #bssEventModal .panel {
+        margin: 10px;
+    }
+
+    #bssEventModal .panel-title {
+        font-size: 22px;
+        position: relative;
+        padding-right: 30px;
+    }
+
+    #bssEventModal .panel-title .pull-right {
+        font-size: 15px;
+        position: absolute;
+        top: 8px;
+        right: 0;
+
+    }
+
+    .files-table .file-name {
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100px;
+    }
+
+    .file-name-detail {
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 210px;
+    }
+}
+
+@media (max-width: 1024px) {
+    #bssEventsRegisterForm .city-wrapper {
+        width: 79%;
+    }
+}
+
+@media (min-width: 767px) {
+    .modal-dialog {
+        width: 73% !important;
+        margin: 30px auto;
+    }
+}
+
+@media (min-width: 1050px) {
+    .modal-dialog {
+        width: 1024px !important;
+        margin: 30px auto;
+    }
+}

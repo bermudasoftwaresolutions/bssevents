@@ -1,0 +1,25 @@
+<f:section name="main">
+    <tr>
+        <th scope="row">*</th>
+        <td class="file-name">
+            <f:if condition="{file.originalResource.title}">
+                <f:then>
+                    <span>{file.originalResource.title}</span>
+                </f:then>
+                <f:else>
+                    <span>{file.originalResource.name}</span>
+                </f:else>
+            </f:if>
+        </td>
+        <td><f:link.action target="upload_target"
+                           class="removeFile"
+                           action="removeAppointmentFile"
+                           controller="Event"
+                           pluginName="p1"
+                           extensionName="bssevents"
+                           arguments="{appointment:appointment, file:file}"
+                           additionalAttributes="{onClick: '$.fn.bssEventsUploadMarker = $(this).parent().parent();'}"><i class="fa fa-times"></i></f:link.action></td>
+        <f:form.hidden name="tx_bssevents_p1[event][appointments][{appointment.uid}][files][]" value="{file.uid}" />
+    </tr>
+</f:section>
+

@@ -1,0 +1,272 @@
+{namespace bss=Bermuda\BssEvents\ViewHelpers}
+{namespace h=Bermuda\BssEvents\ViewHelpers}
+<div class="row">
+
+    <f:if condition="{isPermitted}">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
+             style="border-bottom: solid lightgrey 1px; padding-bottom: 10px;">
+
+            <f:comment>Excel export button</f:comment>
+            <f:if condition="{appointment.registration}">
+                <f:link.action extensionName="bssevents" pluginName="P1" controller="Event" action="export"
+                               arguments="{appointment:appointment}" class="donthover" title="Excel-Export"
+                               target="_blank">
+                    <i class="fa fa-download fa-2x pull-right" aria-hidden="true"></i>
+                </f:link.action>
+            </f:if>
+
+            <f:comment>Event edit button</f:comment>
+            <f:if condition="{isCreator}||{isModerator}">
+                <f:link.action id="eventEditBtn" extensionName="bssevents" pluginName="P1" controller="Event"
+                               action="edit" arguments="{event:appointment.event}" class="donthover" title="Edit Event">
+                    <i class="fas fa-pen-square fa-2x" aria-hidden="true"></i>
+                </f:link.action>
+
+                <script>
+
+                    $('#eventEditBtn').on('click', function (e) {
+
+                        // stop link navigation
+                        e.preventDefault();
+
+                        // show loading modal
+                        // var title = $(this).find('span,div').data('title');
+                        //$.bss.event.modalLoading('');
+
+                        // start ajaxing
+                        var request = $.ajax({
+                            url: $(this).attr('href'),
+                            method: "POST",
+                            data: {ajax: true},
+                            dataType: "json"
+                        });
+
+                        request.done(function (msg) {
+                            if (msg['error'] == true) {
+                                $('#bssEventModal').modal('toggle');
+                                alert(msg['message']);
+                            } else {
+                                $('#bssEventModal').find('.modal-body').html(msg['message']);
+
+                                var language = $("#appointment-template-container").data('language');
+
+                                tinymce.editors = [];
+                                tinymce.init({
+                                    selector: '#bodyTextarea',
+                                    menubar: false,
+                                    plugins: 'image, uploadimage, link',
+                                    toolbar: 'undo,redo | styleselect | fontselect fontsizeselect bold italic | alignleft aligncenter alignright | link | image uploadimage',
+                                    language: language,
+                                    paste_data_images: true,
+                                    images_upload_handler: function (blobInfo, success, failure) {
+                                        success("data:" + blobInfo.blob().type + ";base64," + blobInfo.base64());
+                                    }
+                                });
+                            }
+                        });
+
+                        request.fail(function (jqXHR, textStatus) {
+                            $('#bssEventModal').modal('toggle');
+                        });
+                    });
+
+                </script>
+
+
+            </f:if>
+
+            <f:comment>Event delete button</f:comment>
+            <f:if condition="{canDelete}">
+                <f:link.action id="eventDeleteBtn" extensionName="bssevents" pluginName="P1" controller="Event"
+                               action="delete" arguments="{appointment:appointment}" class="donthover"
+                               title="Delete Event">
+                    <i class="far fa-trash-alt fa-2x" aria-hidden="true"></i>
+                </f:link.action>
+
+                <script>
+                    $("#eventDeleteBtn").on("click", function (e) {
+                        var url = $(this).attr('href');
+
+                        e.preventDefault();
+
+                        var doDelete = confirm('<f:translate key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_event.ask_delete" />');
+                        if (doDelete) {
+                            $.ajax({
+                                url: url,
+                                method: "POST"
+                            }).done(function (data) {
+                                if (data.error == false) {
+                                    location.reload();
+                                } else {
+                                    alert(data.message);
+                                }
+                            })
+                        }
+                    })
+                </script>
+
+            </f:if>
+
+        </div>
+    </f:if>
+
+    <div class="{f:if( condition: '{appointment.registration} && {appointment.registration.do} && {appointment.state} == \'active\' && {appointment.registration.close} == 0', then:'col-xs-12 col-sm-12 col-md-6', else:'col-md-12')}">
+
+        <div class="eventTitle" style="display: none;">
+            <span>
+                <f:translate
+                        key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_event.title"/>:
+            </span>
+            <span>
+                {appointment.event.title}
+            </span>
+        </div>
+
+        <h4 class="modal-title pt-2 pb-2">
+            {appointment.event.title}
+        </h4>
+
+
+        <table class="table" id="events-detail-modal-header-table">
+            <tr>
+                <td class="pt-1 pb-1" style="width: 34%;">
+                    <f:translate
+                            key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_event.categories"/>
+                    :
+                </td>
+                <td class="pt-1 pb-1" style="width: 66%;">
+                    <f:for each="{appointment.event.categories}" as="category"><span style="color: {category.color};">{category.title} </span>
+                    </f:for>
+                </td>
+            </tr>
+            <tr>
+                <td class="pt-1 pb-1" style="width: 34%;">
+                    <f:translate
+                            key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_event.date"/>
+                    :
+                </td>
+                <td class="pt-1 pb-1" style="width: 66%;">{appointment.dateFrom -> f:format.date(format: 'd.m.Y')} -
+                    {appointment.dateTo -> f:format.date(format: 'd.m.Y')}
+                </td>
+            </tr>
+            <!--
+            <tr>
+                <td><f:translate key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_event.time" />:</td>
+                <td style="width: 100%;">{appointment.dateFrom -> f:format.date(format: 'H:i')} - {appointment.dateTo -> f:format.date(format: 'H:i')}</td>
+            </tr>
+            -->
+            <tr>
+                <td class="pt-1 pb-1" style="width: 34%;">
+                    <f:translate
+                            key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_event.venue"/>
+                    :
+                </td>
+                <td class="pt-1 pb-1" style="width: 66%;">{appointment.event.place}</td>
+            </tr>
+            <tr style="border-bottom: solid 1px #ddd;">
+                <td class="pt-1 pb-1" style="width: 34%;">
+                    <f:translate
+                            key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_event.organizer"/>
+                    :
+                </td>
+                <td class="pt-1 pb-1" style="width: 66%;">{appointment.event.organizer}</td>
+            </tr>
+        </table>
+        <f:if condition="{user}">
+            <f:if condition="{appointment.event.body}">
+                <div id="event-detail-content">
+                    <f:format.raw>{appointment.event.body}</f:format.raw>
+                </div>
+            </f:if>
+            <f:if condition="{appointment.event.image.0} && {settings.bssEvents.main.image_upload}">
+                <ul class="image-container">
+                    <f:for each="{appointment.event.image}" as="image">
+                        <li class="show-image">
+                            <label>
+                                <f:link.typolink parameter="{image.originalResource.publicUrl}" target="_blank">
+                                    <f:image image="{image}" alt="" maxWidth="200"/>
+                                </f:link.typolink>
+                            </label>
+                        </li>
+                    </f:for>
+                </ul>
+            </f:if>
+
+
+        </f:if>
+        <f:if condition="{f:count(subject: appointment.files)} > 0 && {settings.bssEvents.main.file_upload}">
+
+            <br/>
+
+            <label for="event-detail-content">
+                <f:translate
+                        key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_event.files.files"/>
+                :</label>
+            <div id="event-file-content">
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">
+                            <f:translate
+                                    key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_event.files.name"/>
+                        </th>
+                        <th scope="col">
+                            <f:translate
+                                    key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_event.files.download"/>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <f:for each="{appointment.files}" as="file" iteration="counter">
+
+                        <tr>
+                            <th scope="row">{counter.cycle}</th>
+                            <td class="file-name-detail">
+                                <f:if condition="{file.originalResource.title}">
+                                    <f:then>
+                                        <span>{file.originalResource.title}</span>
+                                    </f:then>
+                                    <f:else>
+                                        <span>{file.originalResource.name}</span>
+                                    </f:else>
+                                </f:if>
+                            </td>
+                            <td><a href="/fileadmin{file.originalResource.originalFile.identifier}?download"
+                                   target="_blank"><i class="fa fa-download"></i></a></td>
+                        </tr>
+
+                    </f:for>
+                    </tbody>
+                </table>
+            </div>
+        </f:if>
+    </div>
+
+    <f:if condition="{appointment.registration} && {appointment.registration.do} && {appointment.state} == 'active' && {appointment.registration.close} == '0'">
+        <f:if condition="{availableSlots} > 0 || {appointment.registration.slots} == '0'">
+            <f:then>
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <f:render partial="registration"
+                              arguments="{appointment:appointment,availableSlots:availableSlots,slots:slots}"/>
+                </div>
+            </f:then>
+            <f:else>
+                <div class="col-xs-12 col-sm-12 col-md-6 no-slots-wrapper">
+                    <h4 class="modal-title pt-2 pb-2" xmlns:f="http://www.w3.org/1999/html">
+                        <f:translate
+                                key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_registration.registration"/>
+                    </h4>
+                    <div class="registration-closed-message">
+                        <f:translate
+                                key="LLL:EXT:bss_events/Resources/Private/Language/locallang_db.xlf:tx_bssevents_event.not_available"/>
+                    </div>
+                </div>
+            </f:else>
+        </f:if>
+    </f:if>
+</div>
+
+
+<!--<a href="http://typo38.dev/index.php?eID=bss_events&action=test">Test eID</a>-->
